@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+{% block extra_styles %}
+    <style>
+    .card-columns {
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 5;
+  }
+}
+    </style>
+{% endblock %}
+{% block content %}
+
+{% for todo in todos %}
+  <div class="row">
+    <div class="col s10 m12">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title"> {{ todo.due_date|date:"m/d/Y" }} - {{todo.title}}</span>
+          <p class="alert alert-info">{{todo.text}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% empty %}
+    <div class="alert alert-info">
+  <strong>No tasks!</strong>
+</div>
+{% endfor %}
+{% endblock %}
+
